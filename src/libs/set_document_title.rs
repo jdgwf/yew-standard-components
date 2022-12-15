@@ -3,9 +3,9 @@ use web_sys;
 pub fn set_document_title(
     site_title: String,
     new_value: String,
-    no_calls: bool,
+    server_side_renderer: bool,
 ) {
-    if no_calls {
+    if server_side_renderer {
         return;
     }
     let document = web_sys::window().unwrap().document().unwrap();
