@@ -76,6 +76,14 @@ impl Component for InputText {
         }
     }
 
+    fn changed(
+        &mut self, ctx: &Context<Self>,
+        _old_props: &Self::Properties
+    ) -> bool {
+
+        true
+    }
+
     fn view(
         &self,
         ctx: &Context<Self>,
