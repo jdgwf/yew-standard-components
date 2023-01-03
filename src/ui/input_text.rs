@@ -77,8 +77,9 @@ impl Component for InputText {
     }
 
     fn changed(
-        &mut self, ctx: &Context<Self>,
-        _old_props: &Self::Properties
+        &mut self,
+        _ctx: &Context<Self>,
+        _old_props: &Self::Properties,
     ) -> bool {
 
         true
