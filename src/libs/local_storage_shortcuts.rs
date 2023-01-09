@@ -23,12 +23,14 @@ pub fn get_local_storage_bool (
                     }
                 }
                 None => {
-                    // keep default value
+                    // keep and set default value
+                    set_local_storage_bool( ls_name, default_value);
                 }
             }
         }
         Err(_) => {
-            // keep default value
+            // keep and set default value
+            set_local_storage_bool( ls_name, default_value);
         },
     }
 
@@ -52,12 +54,14 @@ pub fn get_local_storage_string (
                     return_value = new_value.to_owned();
                 }
                 None => {
-                    // keep default value
+                    // keep and set default value
+                    set_local_storage_string( ls_name, default_value);
                 }
             }
         }
         Err(_) => {
-            // keep default value
+            // keep and set default value
+            set_local_storage_string( ls_name, default_value);
         },
     }
 

@@ -9,9 +9,6 @@ pub struct TextAreaProps {
     pub onchange: Callback<String>,
 
     #[prop_or_default]
-    pub input_type: String,
-
-    #[prop_or_default]
     pub title: String,
 
     #[prop_or_default]
@@ -94,10 +91,6 @@ impl Component for TextArea {
             );
         }
 
-        let mut input_type = ctx.props().input_type.to_owned();
-        if input_type.is_empty() {
-            input_type = "text".to_owned();
-        }
 
         html! {
             <label
@@ -114,7 +107,6 @@ impl Component for TextArea {
                 <textarea
                     class={ctx.props().input_class.to_owned()}
                     placeholder={ctx.props().placeholder.to_owned()}
-                    type={input_type}
                     readonly={ctx.props().readonly}
                     oninput={onchange}
                     value={ctx.props().value.to_owned()}
