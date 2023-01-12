@@ -6,4 +6,5 @@ pub mod textarea;
 
 pub mod markdown_editor;
 pub mod markdown_view;
+pub mod standard_form_save_buttons;
 pub mod content_box;

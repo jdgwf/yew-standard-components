@@ -38,6 +38,8 @@ pub struct TextAreaProps {
     #[prop_or_default]
     pub children: Children,
 
+    #[prop_or_default]
+    pub starting_height: u32,
 }
 
 pub enum TextAreaMessage {
@@ -70,10 +72,19 @@ impl Component for TextArea {
         }
     }
 
+
+
     fn view(
         &self,
         ctx: &Context<Self>,
     ) -> Html {
+
+
+        let mut style = "height: 100px".to_owned();
+
+        if ctx.props().starting_height > 100 {
+            style = "height: ".to_owned() + &ctx.props().starting_height.to_string() + &"px";
+        }
 
         let onchange = ctx.link().callback(
             |event: InputEvent| {
@@ -108,6 +119,7 @@ impl Component for TextArea {
                     class={ctx.props().input_class.to_owned()}
                     placeholder={ctx.props().placeholder.to_owned()}
                     readonly={ctx.props().readonly}
+                    style={style}
                     oninput={onchange}
                     value={ctx.props().value.to_owned()}
                 />
