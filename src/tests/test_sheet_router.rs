@@ -235,7 +235,7 @@ impl Component for TestSheetRouter {
         ctx: &Context<Self>,
         _props: &TestSheetRouterProps,
     ) -> bool {
-        // log!("main_home changed called" );
+
         self.global_vars = ctx.props().global_vars.clone();
         true
     }
