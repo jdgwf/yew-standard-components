@@ -72,13 +72,10 @@ impl Component for TextArea {
         }
     }
 
-
-
     fn view(
         &self,
         ctx: &Context<Self>,
     ) -> Html {
-
 
         let mut style = "height: 100px".to_owned();
 
@@ -101,7 +98,6 @@ impl Component for TextArea {
                 </div>
             );
         }
-
 
         html! {
             <label

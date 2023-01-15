@@ -16,7 +16,6 @@ pub struct Props {
     #[prop_or_default]
     pub save_as_new_callback: Option<Callback<bool>>,
 
-
     #[prop_or_default]
     pub add_label: Option<String>,
 
@@ -26,12 +25,10 @@ pub struct Props {
     #[prop_or_default]
     pub save_as_new_label: Option<String>,
 
-
 }
 
 #[function_component]
 pub fn StandardFormSaveButtons( props: &Props) -> Html {
-
 
     let mut close_cancel_label = "Close".to_owned();
 
@@ -57,7 +54,6 @@ pub fn StandardFormSaveButtons( props: &Props) -> Html {
     let mut save_as_new_button = html!{<></>};
 
     let close_cancel_callback = props.close_cancel_callback.clone();
-
 
     match &props.add_callback {
         Some( cb ) => {
@@ -116,8 +112,6 @@ pub fn StandardFormSaveButtons( props: &Props) -> Html {
         }
     }
 
-
-
     let close_button = html!{
         <button
             class="btn btn-secondary"
@@ -128,7 +122,6 @@ pub fn StandardFormSaveButtons( props: &Props) -> Html {
             <i class="fa fa-cancel" /><Nbsp />{close_cancel_label}
         </button>
     };
-
 
     html! {
         <div class="text-right">

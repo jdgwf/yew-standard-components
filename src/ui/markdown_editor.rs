@@ -107,14 +107,11 @@ impl Component for MarkdownEditor {
                 let end: usize = current_election_end.try_into().unwrap();
                 let start: usize = current_election_start.try_into().unwrap();
 
-
                 // log!("current_election_start", current_election_start);
                 // log!("current_election_end", current_election_end);
 
-
                 // log!("start", start);
                 // log!("end", end);
-
 
                 // ctx.props().onchange.emit( new_value + "\t" );
                 let value = ctx.props().value.clone();
@@ -125,7 +122,6 @@ impl Component for MarkdownEditor {
                 let new_value = first + &"\t" + &last;
 
                 log!("new_value", &new_value);
-
 
                 ctx.props().onchange.emit( new_value );
                 // let _ = input. /set_selection_start( Some(current_election_start + 1) );
@@ -160,7 +156,6 @@ impl Component for MarkdownEditor {
             edit_style = "height: ".to_owned() + &ctx.props().starting_height.to_string() + &"px";
             view_style = "min-height: ".to_owned() + &ctx.props().starting_height.to_string() + &"px";
         }
-
 
         let onchange = ctx.link().callback(
             |event: InputEvent| {

@@ -1,11 +1,9 @@
 use web_sys;
 
-
 pub fn clear_local_storage () {
     let ls = web_sys::window().unwrap().local_storage().unwrap().unwrap();
     let _ = ls.clear();
 }
-
 
 pub fn get_local_storage_u32(
     ls_name: &str,

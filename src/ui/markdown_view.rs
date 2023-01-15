@@ -10,7 +10,6 @@ pub struct Props {
 #[function_component]
 pub fn MarkdownView( props: &Props) -> Html {
 
-
     // add a final newline so the parser lib doesn't gripe.
     let markdown_text = props.markdown.to_owned() + &"\n";
 
