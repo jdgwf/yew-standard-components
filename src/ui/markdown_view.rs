@@ -1,4 +1,4 @@
-use gloo_console::log;
+// use gloo_console::log;
 use yew::{function_component, Html, Properties};
 use web_sys::{Element, Node};
 use markdown_to_html;

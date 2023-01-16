@@ -11,10 +11,16 @@ pub struct Props {
     pub add_callback: Option<Callback<bool>>,
 
     #[prop_or_default]
+    pub add_leave_open_callback: Option<Callback<bool>>,
+
+    #[prop_or_default]
     pub save_callback: Option<Callback<bool>>,
 
     #[prop_or_default]
     pub save_as_new_callback: Option<Callback<bool>>,
+
+    #[prop_or_default]
+    pub save_and_leave_open_callback: Option<Callback<bool>>,
 
     #[prop_or_default]
     pub add_label: Option<String>,
@@ -62,11 +68,33 @@ pub fn StandardFormSaveButtons( props: &Props) -> Html {
             add_button = html!{
                 <button
                     class="btn btn-success"
+                    type="button"
                     onclick={move |_e | {
                         the_callback.emit(true);
                     }}
                 >
-                    <i class="fa fa-plus" /><Nbsp />{add_label}
+                    <i class="fa fa-plus" /><Nbsp />{add_label.to_owned()}
+                </button>
+            };
+        }
+        None => {
+
+        }
+    }
+
+    match &props.add_leave_open_callback {
+        Some( cb ) => {
+            let the_callback = cb.clone();
+            close_cancel_label = "Cancel".to_owned();
+            add_button = html!{
+                <button
+                    class="btn btn-success"
+                    type="button"
+                    onclick={move |_e | {
+                        the_callback.emit(true);
+                    }}
+                >
+                    <i class="fa fa-plus" /><Nbsp />{add_label.to_owned() + &" & Leave Open"}
                 </button>
             };
         }
@@ -81,8 +109,9 @@ pub fn StandardFormSaveButtons( props: &Props) -> Html {
             save_button = html!{
                 <button
                     class="btn btn-success"
+                    type="submit"
                     onclick={move |_e | {
-                        the_callback.emit(true);
+                        the_callback.emit(false);
                     }}
                 >
                     <i class="fa fa-floppy-disk" /><Nbsp />{save_label}
@@ -99,6 +128,7 @@ pub fn StandardFormSaveButtons( props: &Props) -> Html {
             save_as_new_button = html!{
                 <button
                     class="btn btn-secondary"
+                    type="button"
                     onclick={move |_e | {
                         the_callback.emit(true);
                     }}
@@ -115,8 +145,9 @@ pub fn StandardFormSaveButtons( props: &Props) -> Html {
     let close_button = html!{
         <button
             class="btn btn-secondary"
+            type="submit"
             onclick={move |_e | {
-                close_cancel_callback.emit(true);
+                close_cancel_callback.emit(false);
             }}
         >
             <i class="fa fa-cancel" /><Nbsp />{close_cancel_label}

@@ -1,5 +1,5 @@
 use yew::prelude::*;
-use super::super::super::ui::nbsp::Nbsp;
+use super::nbsp::Nbsp;
 
 #[derive(Properties, PartialEq)]
 pub struct InputLabelProps {

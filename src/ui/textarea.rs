@@ -1,5 +1,5 @@
 use yew::prelude::*;
-use super::super::internal::ui::input_label::InputLabel;
+use super::input_label::InputLabel;
 use web_sys::{HtmlInputElement};
 
 #[derive(Properties, PartialEq)]

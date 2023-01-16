@@ -69,7 +69,7 @@ impl Component for TestSheet {
                 global_vars.test2 = new_value.to_owned();
                 set_local_storage_string( "test2", new_value );
 
-                ctx.props().update_global_vars.emit( global_vars.to_owned() );
+                ctx.props().global_vars.update_global_vars.emit( global_vars.to_owned() );
                 self.global_vars = global_vars.clone();
                 return false;
             }
@@ -79,7 +79,7 @@ impl Component for TestSheet {
                 global_vars.check1 = new_value.to_owned();
                 set_local_storage_bool( "check1", new_value );
 
-                ctx.props().update_global_vars.emit( global_vars.to_owned() );
+                ctx.props().global_vars.update_global_vars.emit( global_vars.to_owned() );
                 self.global_vars = global_vars.clone();
                 return true;
             }
@@ -88,7 +88,7 @@ impl Component for TestSheet {
                 global_vars.check2 = new_value.to_owned();
                 set_local_storage_bool( "check2", new_value );
 
-                ctx.props().update_global_vars.emit( global_vars.to_owned() );
+                ctx.props().global_vars.update_global_vars.emit( global_vars.to_owned() );
                 self.global_vars = global_vars.clone();
                 return true;
             }
@@ -97,7 +97,7 @@ impl Component for TestSheet {
                 global_vars.check3 = new_value.to_owned();
                 set_local_storage_bool( "check3", new_value );
 
-                ctx.props().update_global_vars.emit( global_vars.to_owned() );
+                ctx.props().global_vars.update_global_vars.emit( global_vars.to_owned() );
                 self.global_vars = global_vars.clone();
                 return true;
             }
@@ -106,7 +106,7 @@ impl Component for TestSheet {
 
                 global_vars.to_dos = todo_vec.clone();
 
-                ctx.props().update_global_vars.emit( global_vars.to_owned() );
+                ctx.props().global_vars.update_global_vars.emit( global_vars.to_owned() );
                 self.global_vars = global_vars.clone();
                 return true;
             }
@@ -165,6 +165,7 @@ impl Component for TestSheet {
                     <legend>{"Fetch API Calls"}</legend>
                     <p>{"The following makes a call to"}<Nbsp /><a href={"https://jsonplaceholder.typicode.com/to_dos/"}>{"https://jsonplaceholder.typicode.com/todos/"}</a><Nbsp />{"then displays the number of records retrieved. It should read '200' once the action button is clicked"}</p>
                     <button
+                        type="button"
                         class={"btn btn-primary"}
                         onclick={do_it}
                     >

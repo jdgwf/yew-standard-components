@@ -1,6 +1,6 @@
 use gloo_console::log;
 use yew::prelude::*;
-use super::{super::internal::ui::input_label::InputLabel, nbsp::Nbsp};
+use super::{input_label::InputLabel, nbsp::Nbsp};
 use web_sys::{HtmlInputElement};
 use crate::ui::markdown_view::MarkdownView;
 use substring::Substring;
@@ -217,6 +217,7 @@ impl Component for MarkdownEditor {
 
                         <div>
                             <button
+                                type="button"
                                 class={edit_button_class}
                                 onclick={move |_e| {
                                     edit_click.emit("edit".to_owned());
@@ -227,6 +228,7 @@ impl Component for MarkdownEditor {
                         </div>
                         <div>
                             <button
+                                type="button"
                                 class={view_button_class}
                                 onclick={move |_e| {
 

@@ -29,6 +29,9 @@ pub struct InputCheckboxProps {
     pub inline: bool,
 
     #[prop_or_default]
+    pub readonly: bool,
+
+    #[prop_or_default]
     pub label_class: String,
 
     #[prop_or_default]
@@ -95,7 +98,7 @@ impl Component for InputCheckbox {
 
         let mut class_variable = "cursor-pointer ".to_owned() + &ctx.props().label_class.to_owned();
 
-        if ctx.props().image_version {
+        if ctx.props().image_version || ctx.props().readonly {
             class_variable = "checkbox-image ".to_owned() + &class_variable;
             if ctx.props().bigger_image {
                 class_variable = "checkbox-image bigger-image ".to_owned() + &class_variable;
@@ -107,6 +110,13 @@ impl Component for InputCheckbox {
                 class={class_variable}
                 title={ctx.props().title.to_owned()}
             >
+if ctx.props().readonly {
+    if ctx.props().checked {
+        <img class={"check-image"} src={image_path.to_owned() + "/check-yes.png"} />
+    } else {
+        <img class={"check-image"} src={image_path.to_owned() + "/check-no.png"} />
+    }
+} else {
                 if ctx.props().image_version {
                     if ctx.props().checked {
                         <img class={"check-image"} src={image_path.to_owned() + "/check-yes.png"} />
@@ -120,6 +130,7 @@ impl Component for InputCheckbox {
                     checked={ctx.props().checked}
                     onchange={onchange}
                 />
+}
                 {ctx.props().label.to_owned()}
 
                 {description}
