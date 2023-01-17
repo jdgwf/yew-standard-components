@@ -55,9 +55,14 @@ pub fn StandardFormSaveButtons( props: &Props) -> Html {
         None => {}
     }
 
+    let add_and_leave_open_label = add_label.to_owned() + &" & Keep Open";
+    let save_and_leave_open_label = save_label.to_owned()+ &" & Keep Open";
+
     let mut add_button = html!{<></>};
     let mut save_button = html!{<></>};
     let mut save_as_new_button = html!{<></>};
+    let mut add_and_leave_open_button = html!{<></>};
+    let mut save_and_leave_open_button = html!{<></>};
 
     let close_cancel_callback = props.close_cancel_callback.clone();
 
@@ -76,6 +81,28 @@ pub fn StandardFormSaveButtons( props: &Props) -> Html {
                     <i class="fa fa-plus" /><Nbsp />{add_label.to_owned()}
                 </button>
             };
+
+        }
+        None => {
+
+        }
+    }
+
+    match &props.save_and_leave_open_callback {
+        Some( cb ) => {
+            let the_callback = cb.clone();
+            close_cancel_label = "Cancel".to_owned();
+            save_and_leave_open_button = html!{
+                <button
+                    class="btn btn-success"
+                    type="button"
+                    onclick={move |_e | {
+                        the_callback.emit(true);
+                    }}
+                >
+                    <i class="fa fa-plus" /><Nbsp />{save_and_leave_open_label}
+                </button>
+            };
         }
         None => {
 
@@ -86,7 +113,7 @@ pub fn StandardFormSaveButtons( props: &Props) -> Html {
         Some( cb ) => {
             let the_callback = cb.clone();
             close_cancel_label = "Cancel".to_owned();
-            add_button = html!{
+            add_and_leave_open_button = html!{
                 <button
                     class="btn btn-success"
                     type="button"
@@ -94,7 +121,7 @@ pub fn StandardFormSaveButtons( props: &Props) -> Html {
                         the_callback.emit(true);
                     }}
                 >
-                    <i class="fa fa-plus" /><Nbsp />{add_label.to_owned() + &" & Leave Open"}
+                    <i class="fa fa-plus" /><Nbsp />{add_and_leave_open_label}
                 </button>
             };
         }
@@ -160,7 +187,7 @@ pub fn StandardFormSaveButtons( props: &Props) -> Html {
                 {save_as_new_button}
             </div>
 
-            {close_button}{save_button}{add_button}
+            {close_button}{add_and_leave_open_button}{save_and_leave_open_button}{save_button}{add_button}
         </div>
     }
 }
