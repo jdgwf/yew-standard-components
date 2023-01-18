@@ -2,3 +2,4 @@ debug/*
 target/*
 src/target
 /Cargo.lock
+.DS_Store
