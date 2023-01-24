@@ -1,9 +1,8 @@
+use web_sys::HtmlInputElement;
 use yew::prelude::*;
-use web_sys::{HtmlInputElement};
 
 #[derive(Properties, PartialEq)]
 pub struct InputCheckboxProps {
-
     #[prop_or_default]
     pub onchange: Callback<bool>,
 
@@ -58,29 +57,20 @@ impl Component for InputCheckbox {
         InputCheckbox
     }
 
-    fn update(
-        &mut self,
-        ctx: &Context<Self>,
-        msg: InputCheckboxMessage,
-    ) -> bool {
+    fn update(&mut self, ctx: &Context<Self>, msg: InputCheckboxMessage) -> bool {
         match msg {
-            InputCheckboxMessage::OnChange( new_value ) => {
-                ctx.props().onchange.emit( new_value );
+            InputCheckboxMessage::OnChange(new_value) => {
+                ctx.props().onchange.emit(new_value);
                 false
             }
         }
     }
 
-    fn view(
-        &self,
-        ctx: &Context<Self>,
-    ) -> Html {
-        let onchange = ctx.link().callback(
-            |event: Event| {
-                let input: HtmlInputElement = event.target_unchecked_into();
-                InputCheckboxMessage::OnChange(input.checked())
-            }
-        );
+    fn view(&self, ctx: &Context<Self>) -> Html {
+        let onchange = ctx.link().callback(|event: Event| {
+            let input: HtmlInputElement = event.target_unchecked_into();
+            InputCheckboxMessage::OnChange(input.checked())
+        });
 
         let mut description = html!(<></>);
         if ctx.props().description.to_owned() != "" {
@@ -106,36 +96,36 @@ impl Component for InputCheckbox {
         }
 
         html! {
-            <label
-                class={class_variable}
-                title={ctx.props().title.to_owned()}
-            >
-if ctx.props().readonly {
-    if ctx.props().checked {
-        <img class={"check-image"} src={image_path.to_owned() + "/check-yes.png"} />
-    } else {
-        <img class={"check-image"} src={image_path.to_owned() + "/check-no.png"} />
-    }
-} else {
-                if ctx.props().image_version {
-                    if ctx.props().checked {
-                        <img class={"check-image"} src={image_path.to_owned() + "/check-yes.png"} />
-                    } else {
-                        <img class={"check-image"} src={image_path.to_owned() + "/check-no.png"} />
-                    }
-                }
-                <input
-                    class={ctx.props().input_class.to_owned()}
-                    type={"checkbox"}
-                    checked={ctx.props().checked}
-                    onchange={onchange}
-                />
-}
-                {ctx.props().label.to_owned()}
-
-                {description}
-                { for ctx.props().children.iter() }
-            </label>
+                    <label
+                        class={class_variable}
+                        title={ctx.props().title.to_owned()}
+                    >
+        if ctx.props().readonly {
+            if ctx.props().checked {
+                <img class={"check-image"} src={image_path.to_owned() + "/check-yes.png"} />
+            } else {
+                <img class={"check-image"} src={image_path.to_owned() + "/check-no.png"} />
+            }
+        } else {
+                        if ctx.props().image_version {
+                            if ctx.props().checked {
+                                <img class={"check-image"} src={image_path.to_owned() + "/check-yes.png"} />
+                            } else {
+                                <img class={"check-image"} src={image_path.to_owned() + "/check-no.png"} />
+                            }
+                        }
+                        <input
+                            class={ctx.props().input_class.to_owned()}
+                            type={"checkbox"}
+                            checked={ctx.props().checked}
+                            onchange={onchange}
+                        />
         }
+                        {ctx.props().label.to_owned()}
+
+                        {description}
+                        { for ctx.props().children.iter() }
+                    </label>
+                }
     }
 }

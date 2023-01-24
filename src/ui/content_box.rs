@@ -2,7 +2,6 @@ use yew::prelude::*;
 
 #[derive(Properties, PartialEq)]
 pub struct ContentBoxProps {
-
     #[prop_or_default]
     pub label_html: Option<Html>,
 
@@ -14,11 +13,9 @@ pub struct ContentBoxProps {
 
     #[prop_or_default]
     pub children: Children,
-
 }
 
-pub enum ContentBoxMessage {
-}
+pub enum ContentBoxMessage {}
 
 pub struct ContentBox;
 
@@ -26,43 +23,32 @@ impl Component for ContentBox {
     type Message = ContentBoxMessage;
     type Properties = ContentBoxProps;
 
-     fn create(_ctx: &Context<Self>) -> Self {
-        ContentBox {
-
-        }
+    fn create(_ctx: &Context<Self>) -> Self {
+        ContentBox {}
     }
 
-    fn view(
-        &self,
-        ctx: &Context<Self>,
-    ) -> Html {
-
+    fn view(&self, ctx: &Context<Self>) -> Html {
         let mut label = "".to_string();
         match &ctx.props().label {
-            Some( label_val ) => {
+            Some(label_val) => {
                 if !label_val.is_empty() {
                     label = label_val.to_owned();
                 }
             }
-            None => {
-
-            }
+            None => {}
         }
 
         let mut class = "content-box".to_owned();
         match &ctx.props().class {
-            Some( class_val ) => {
+            Some(class_val) => {
                 if class_val.is_empty() {
                     class = "content-box".to_owned();
                 } else {
                     class = "content-box ".to_owned() + &class_val;
                 }
             }
-            None => {
-
-            }
+            None => {}
         }
-
 
         let label_html = ctx.props().label_html.clone();
 

@@ -1,10 +1,9 @@
-use yew::prelude::*;
 use super::input_label::InputLabel;
-use web_sys::{HtmlInputElement};
+use web_sys::HtmlInputElement;
+use yew::prelude::*;
 
 #[derive(Properties, PartialEq)]
 pub struct InputTextProps {
-
     #[prop_or_default]
     pub onchange: Callback<String>,
 
@@ -43,7 +42,6 @@ pub struct InputTextProps {
 
     #[prop_or_default]
     pub children: Children,
-
 }
 
 pub enum InputTextMessage {
@@ -56,46 +54,29 @@ impl Component for InputText {
     type Message = InputTextMessage;
     type Properties = InputTextProps;
 
-     fn create(_ctx: &Context<Self>) -> Self {
-        InputText {
-
-        }
+    fn create(_ctx: &Context<Self>) -> Self {
+        InputText {}
     }
 
-    fn update(
-        &mut self,
-        ctx: &Context<Self>,
-        msg: InputTextMessage,
-    ) -> bool {
+    fn update(&mut self, ctx: &Context<Self>, msg: InputTextMessage) -> bool {
         match msg {
-            InputTextMessage::OnChange( new_value ) => {
+            InputTextMessage::OnChange(new_value) => {
                 // self.value += 1;
-                ctx.props().onchange.emit( new_value );
+                ctx.props().onchange.emit(new_value);
                 false
             }
         }
     }
 
-    fn changed(
-        &mut self,
-        _ctx: &Context<Self>,
-        _old_props: &Self::Properties,
-    ) -> bool {
-
+    fn changed(&mut self, _ctx: &Context<Self>, _old_props: &Self::Properties) -> bool {
         true
     }
 
-    fn view(
-        &self,
-        ctx: &Context<Self>,
-    ) -> Html {
-
-        let onchange = ctx.link().callback(
-            |event: InputEvent| {
-                let input: HtmlInputElement = event.target_unchecked_into();
-                InputTextMessage::OnChange(input.value())
-            }
-        );
+    fn view(&self, ctx: &Context<Self>) -> Html {
+        let onchange = ctx.link().callback(|event: InputEvent| {
+            let input: HtmlInputElement = event.target_unchecked_into();
+            InputTextMessage::OnChange(input.value())
+        });
 
         let mut description = html!(<></>);
         if ctx.props().description.to_owned() != "" {

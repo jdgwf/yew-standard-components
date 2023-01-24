@@ -1,13 +1,12 @@
-use gloo_console::log;
-use yew::prelude::*;
 use super::{input_label::InputLabel, nbsp::Nbsp};
-use web_sys::{HtmlInputElement};
 use crate::ui::markdown_view::MarkdownView;
+use gloo_console::log;
 use substring::Substring;
+use web_sys::HtmlInputElement;
+use yew::prelude::*;
 
 #[derive(Properties, PartialEq)]
 pub struct MarkdownEditorProps {
-
     #[prop_or_default]
     pub onchange: Callback<String>,
 
@@ -60,24 +59,16 @@ impl Component for MarkdownEditor {
     type Message = MarkdownEditorMessage;
     type Properties = MarkdownEditorProps;
 
-     fn create(_ctx: &Context<Self>) -> Self {
-        MarkdownEditor {
-            edit: true,
-
-        }
+    fn create(_ctx: &Context<Self>) -> Self {
+        MarkdownEditor { edit: true }
     }
 
-    fn update(
-        &mut self,
-        ctx: &Context<Self>,
-        msg: MarkdownEditorMessage,
-    ) -> bool {
+    fn update(&mut self, ctx: &Context<Self>, msg: MarkdownEditorMessage) -> bool {
         match msg {
-            MarkdownEditorMessage::OnChange( event ) => {
-
+            MarkdownEditorMessage::OnChange(event) => {
                 let input: HtmlInputElement = event.target_unchecked_into();
 
-                ctx.props().onchange.emit( input.value() );
+                ctx.props().onchange.emit(input.value());
                 return false;
             }
 
@@ -85,23 +76,22 @@ impl Component for MarkdownEditor {
                 return false;
             }
             MarkdownEditorMessage::InsertTab(event) => {
-
                 let input: HtmlInputElement = event.target_unchecked_into();
 
                 let mut current_election_start: u32 = 0;
                 let mut current_election_end: u32 = 0;
                 match input.selection_start() {
-                    Ok( val ) => {
+                    Ok(val) => {
                         current_election_start = val.unwrap();
                     }
-                    Err( _err ) => {}
+                    Err(_err) => {}
                 }
 
                 match input.selection_end() {
-                    Ok( val ) => {
+                    Ok(val) => {
                         current_election_end = val.unwrap();
                     }
-                    Err( _err ) => {}
+                    Err(_err) => {}
                 }
 
                 let end: usize = current_election_end.try_into().unwrap();
@@ -116,18 +106,18 @@ impl Component for MarkdownEditor {
                 // ctx.props().onchange.emit( new_value + "\t" );
                 let value = ctx.props().value.clone();
                 let first = value.substring(0, start).to_owned();
-                let last = value.substring(end, value.len() ).to_owned();
+                let last = value.substring(end, value.len()).to_owned();
                 log!("first", &first);
                 log!("last", &last);
                 let new_value = first + &"\t" + &last;
 
                 log!("new_value", &new_value);
 
-                ctx.props().onchange.emit( new_value );
+                ctx.props().onchange.emit(new_value);
                 // let _ = input. /set_selection_start( Some(current_election_start + 1) );
                 return false;
             }
-            MarkdownEditorMessage::SetTab( new_value ) => {
+            MarkdownEditorMessage::SetTab(new_value) => {
                 match new_value.as_str() {
                     "edit" => {
                         self.edit = true;
@@ -144,37 +134,28 @@ impl Component for MarkdownEditor {
         }
     }
 
-    fn view(
-        &self,
-        ctx: &Context<Self>,
-    ) -> Html {
-
+    fn view(&self, ctx: &Context<Self>) -> Html {
         let mut edit_style = "height: 100px".to_owned();
         let mut view_style = "min-height: 100px".to_owned();
 
         if ctx.props().starting_height > 100 {
             edit_style = "height: ".to_owned() + &ctx.props().starting_height.to_string() + &"px";
-            view_style = "min-height: ".to_owned() + &ctx.props().starting_height.to_string() + &"px";
+            view_style =
+                "min-height: ".to_owned() + &ctx.props().starting_height.to_string() + &"px";
         }
 
-        let onchange = ctx.link().callback(
-            |event: InputEvent| {
+        let onchange = ctx
+            .link()
+            .callback(|event: InputEvent| MarkdownEditorMessage::OnChange(event));
 
-                MarkdownEditorMessage::OnChange(event)
+        let onkeydown = ctx.link().callback(|event: KeyboardEvent| {
+            if event.key_code() == 9 {
+                log!("istab");
+                event.prevent_default();
+                return MarkdownEditorMessage::InsertTab(event);
             }
-        );
-
-        let onkeydown= ctx.link().callback(
-            |event: KeyboardEvent| {
-                if event.key_code() == 9 {
-                    log!("istab");
-                    event.prevent_default();
-                    return MarkdownEditorMessage::InsertTab(event);
-                }
-                return MarkdownEditorMessage::DoNothing();
-
-            }
-        );
+            return MarkdownEditorMessage::DoNothing();
+        });
 
         let mut description = html!(<></>);
         if ctx.props().description.to_owned() != "" {
