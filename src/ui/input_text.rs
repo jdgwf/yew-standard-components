@@ -61,7 +61,7 @@ impl Component for InputText {
     fn update(&mut self, ctx: &Context<Self>, msg: InputTextMessage) -> bool {
         match msg {
             InputTextMessage::OnChange(new_value) => {
-                // self.value += 1;
+
                 ctx.props().onchange.emit(new_value);
                 false
             }

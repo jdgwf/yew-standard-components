@@ -58,7 +58,7 @@ impl Component for TextArea {
     fn update(&mut self, ctx: &Context<Self>, msg: TextAreaMessage) -> bool {
         match msg {
             TextAreaMessage::OnChange(new_value) => {
-                // self.value += 1;
+
                 ctx.props().onchange.emit(new_value);
                 false
             }
