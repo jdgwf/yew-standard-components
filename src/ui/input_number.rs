@@ -100,7 +100,7 @@ impl Component for InputNumber {
             );
         }
 
-        let mut val = "".to_owned();
+        let mut val = ctx.props().value.to_string();
 
         let mut drop_down_version = false;
 
@@ -116,7 +116,6 @@ impl Component for InputNumber {
 
             }
             None => {
-                val = ctx.props().value.to_string();
             }
         }
 
@@ -150,11 +149,6 @@ impl Component for InputNumber {
 
                     <select
                         class={ctx.props().input_class.to_owned()}
-                        // placeholder={ctx.props().placeholder.to_owned()}
-                        // type={"number"}
-                        // min={ctx.props().min.clone()}
-                        // max={ctx.props().max.clone()}
-                        // step={ctx.props().step.clone()}
                         readonly={ctx.props().readonly}
                         value={val}
                         onchange={onchange_select}
