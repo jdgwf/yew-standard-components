@@ -107,11 +107,11 @@ impl Component for MarkdownEditor {
                 let value = ctx.props().value.clone();
                 let first = value.substring(0, start).to_owned();
                 let last = value.substring(end, value.len()).to_owned();
-                log!("first", &first);
-                log!("last", &last);
+                // log!("first", &first);
+                // log!("last", &last);
                 let new_value = first + &"\t" + &last;
-
-                log!("new_value", &new_value);
+//
+                // log!("new_value", &new_value);
 
                 ctx.props().onchange.emit(new_value);
                 // let _ = input. /set_selection_start( Some(current_election_start + 1) );
@@ -150,7 +150,7 @@ impl Component for MarkdownEditor {
 
         let onkeydown = ctx.link().callback(|event: KeyboardEvent| {
             if event.key_code() == 9 {
-                log!("istab");
+                // log!("istab");
                 event.prevent_default();
                 return MarkdownEditorMessage::InsertTab(event);
             }
