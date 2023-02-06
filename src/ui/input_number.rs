@@ -1,4 +1,4 @@
-use super::input_label::InputLabel;
+use super::input_label::{InputLabel, _InputLabelProps::label};
 use gloo_console::error;
 use web_sys::{HtmlInputElement, HtmlSelectElement};
 use yew::prelude::*;
@@ -135,9 +135,14 @@ impl Component for InputNumber {
             let min = min_str.unwrap_or("0".to_owned()).parse::<i32>().unwrap_or(0);
             let max = max_str.unwrap_or("0".to_owned()).parse::<i32>().unwrap_or(0) + 1;
             let num_val = val.parse::<i32>().unwrap_or(0);
+            let mut label_class = ctx.props().label_class.to_owned();
+
+            if ctx.props().inline {
+                label_class = label_class + &" inline";
+            }
             html! {
                 <label
-                    class={ctx.props().label_class.to_owned()}
+                    class={label_class.to_owned()}
                     title={ctx.props().title.to_owned()}
                 >
                     <InputLabel

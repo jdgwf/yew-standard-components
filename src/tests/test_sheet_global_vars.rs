@@ -2,7 +2,7 @@ use serde::{Serialize, Deserialize};
 use std::rc::Rc;
 use yew::prelude::*;
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct TestSheetGlobalVars {
     pub api_key: String,
     pub test2: String,
@@ -13,7 +13,7 @@ pub struct TestSheetGlobalVars {
 
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 #[allow(non_snake_case)]
 pub struct PlaceholderToDo {
     userId: u32,

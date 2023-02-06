@@ -91,10 +91,14 @@ impl Component for InputText {
         if input_type.is_empty() {
             input_type = "text".to_owned();
         }
+        let mut label_class = ctx.props().label_class.to_owned();
 
+        if ctx.props().inline {
+            label_class = label_class + &" inline";
+        }
         html! {
             <label
-                class={ctx.props().label_class.to_owned()}
+                class={label_class.to_owned()}
                 title={ctx.props().title.to_owned()}
             >
                 <InputLabel

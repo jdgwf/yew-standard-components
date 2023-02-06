@@ -9,7 +9,7 @@ use crate::libs::set_document_title::set_document_title;
 
 pub type TestSheetGlobalVarsContext = UseReducerHandle<TestSheetGlobalVars>;
 
-#[derive(Clone, Routable, PartialEq)]
+#[derive(Clone, Routable)]
 pub enum TestSheetRoute {
     #[at("/test-sheet/home")]
     Home,
