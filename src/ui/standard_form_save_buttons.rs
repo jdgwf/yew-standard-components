@@ -159,7 +159,7 @@ pub fn StandardFormSaveButtons(props: &Props) -> Html {
     let close_button = html! {
         <button
             class="btn btn-secondary"
-            type="submit"
+            type="button"
             onclick={move |_e | {
                 close_cancel_callback.emit(false);
             }}
