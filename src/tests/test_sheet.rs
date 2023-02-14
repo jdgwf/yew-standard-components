@@ -15,7 +15,7 @@ use serde_json::Error;
 
 #[derive(Properties, PartialEq)]
 pub struct TestSheetProps {
-    pub update_global_vars: Callback<TestSheetGlobalVars>,
+    pub update_site_vars: Callback<TestSheetGlobalVars>,
     pub global_vars: TestSheetGlobalVars,
 }
 
@@ -69,7 +69,7 @@ impl Component for TestSheet {
                 global_vars.test2 = new_value.to_owned();
                 set_local_storage_string( "test2", new_value );
 
-                ctx.props().global_vars.update_global_vars.emit( global_vars.to_owned() );
+                ctx.props().global_vars.update_site_vars.emit( global_vars.to_owned() );
                 self.global_vars = global_vars.clone();
                 return false;
             }
@@ -79,7 +79,7 @@ impl Component for TestSheet {
                 global_vars.check1 = new_value.to_owned();
                 set_local_storage_bool( "check1", new_value );
 
-                ctx.props().global_vars.update_global_vars.emit( global_vars.to_owned() );
+                ctx.props().global_vars.update_site_vars.emit( global_vars.to_owned() );
                 self.global_vars = global_vars.clone();
                 return true;
             }
@@ -88,7 +88,7 @@ impl Component for TestSheet {
                 global_vars.check2 = new_value.to_owned();
                 set_local_storage_bool( "check2", new_value );
 
-                ctx.props().global_vars.update_global_vars.emit( global_vars.to_owned() );
+                ctx.props().global_vars.update_site_vars.emit( global_vars.to_owned() );
                 self.global_vars = global_vars.clone();
                 return true;
             }
@@ -97,7 +97,7 @@ impl Component for TestSheet {
                 global_vars.check3 = new_value.to_owned();
                 set_local_storage_bool( "check3", new_value );
 
-                ctx.props().global_vars.update_global_vars.emit( global_vars.to_owned() );
+                ctx.props().global_vars.update_site_vars.emit( global_vars.to_owned() );
                 self.global_vars = global_vars.clone();
                 return true;
             }
@@ -106,7 +106,7 @@ impl Component for TestSheet {
 
                 global_vars.to_dos = todo_vec.clone();
 
-                ctx.props().global_vars.update_global_vars.emit( global_vars.to_owned() );
+                ctx.props().global_vars.update_site_vars.emit( global_vars.to_owned() );
                 self.global_vars = global_vars.clone();
                 return true;
             }

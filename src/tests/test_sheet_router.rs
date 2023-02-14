@@ -22,7 +22,7 @@ pub enum TestSheetRoute {
 fn content_switch(
     routes: &TestSheetRoute,
     global_vars: TestSheetGlobalVars,
-    update_global_vars: Callback<TestSheetGlobalVars>,
+    update_site_vars: Callback<TestSheetGlobalVars>,
 ) -> Html {
 
     match routes {
@@ -31,7 +31,7 @@ fn content_switch(
             html! {
                 <TestSheet
                     global_vars={global_vars}
-                    update_global_vars={update_global_vars}
+                    update_site_vars={update_site_vars}
                 />
             }
         },
@@ -106,7 +106,7 @@ pub struct TestSheetRouterProps {
 //         }
 //     );
 
-//     let update_global_vars = Callback::from(
+//     let update_site_vars = Callback::from(
 //         | _new_global_vars: TestSheetGlobalVars |  {
 //             // global_vars.check1 = new_global_vars.check1;
 //             // global_vars.check2 = new_global_vars.check2;
@@ -142,7 +142,7 @@ pub struct TestSheetRouterProps {
 //                             content_switch(
 //                                 routes,
 //                                 global_vars.clone(),
-//                                 update_global_vars.clone(),
+//                                 update_site_vars.clone(),
 //                             )
 //                         )}
 
@@ -189,7 +189,7 @@ impl Component for TestSheetRouter {
         }
     );
 
-    let update_global_vars = Callback::from(
+    let update_site_vars = Callback::from(
         | _new_global_vars: TestSheetGlobalVars |  {
             // global_vars.check1 = new_global_vars.check1;
             // global_vars.check2 = new_global_vars.check2;
@@ -260,7 +260,7 @@ impl Component for TestSheetRouter {
                                 content_switch(
                                     routes,
                                     global_vars.clone(),
-                                    update_global_vars.clone(),
+                                    update_site_vars.clone(),
                                 )
                             )}
 
