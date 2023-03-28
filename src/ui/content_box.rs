@@ -27,7 +27,10 @@ impl Component for ContentBox {
         ContentBox {}
     }
 
-    fn view(&self, ctx: &Context<Self>) -> Html {
+    fn view(
+        &self,
+        ctx: &Context<Self>,
+    ) -> Html {
         let mut label = "".to_string();
         match &ctx.props().label {
             Some(label_val) => {

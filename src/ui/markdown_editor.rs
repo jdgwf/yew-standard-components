@@ -63,7 +63,11 @@ impl Component for MarkdownEditor {
         MarkdownEditor { edit: true }
     }
 
-    fn update(&mut self, ctx: &Context<Self>, msg: MarkdownEditorMessage) -> bool {
+    fn update(
+        &mut self,
+        ctx: &Context<Self>,
+        msg: MarkdownEditorMessage,
+    ) -> bool {
         match msg {
             MarkdownEditorMessage::OnChange(event) => {
                 let input: HtmlInputElement = event.target_unchecked_into();
@@ -110,7 +114,7 @@ impl Component for MarkdownEditor {
                 // log!("first", &first);
                 // log!("last", &last);
                 let new_value = first + &"\t" + &last;
-//
+                //
                 // log!("new_value", &new_value);
 
                 ctx.props().onchange.emit(new_value);
@@ -134,7 +138,10 @@ impl Component for MarkdownEditor {
         }
     }
 
-    fn view(&self, ctx: &Context<Self>) -> Html {
+    fn view(
+        &self,
+        ctx: &Context<Self>,
+    ) -> Html {
         let mut edit_style = "height: 100px".to_owned();
         let mut view_style = "min-height: 100px".to_owned();
 

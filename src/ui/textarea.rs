@@ -55,17 +55,23 @@ impl Component for TextArea {
         TextArea {}
     }
 
-    fn update(&mut self, ctx: &Context<Self>, msg: TextAreaMessage) -> bool {
+    fn update(
+        &mut self,
+        ctx: &Context<Self>,
+        msg: TextAreaMessage,
+    ) -> bool {
         match msg {
             TextAreaMessage::OnChange(new_value) => {
-
                 ctx.props().onchange.emit(new_value);
                 false
             }
         }
     }
 
-    fn view(&self, ctx: &Context<Self>) -> Html {
+    fn view(
+        &self,
+        ctx: &Context<Self>,
+    ) -> Html {
         let mut style = "height: 100px".to_owned();
 
         if ctx.props().starting_height > 100 {

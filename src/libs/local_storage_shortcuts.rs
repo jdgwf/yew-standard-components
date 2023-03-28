@@ -5,7 +5,10 @@ pub fn clear_local_storage() {
     let _ = ls.clear();
 }
 
-pub fn get_local_storage_u32(ls_name: &str, default_value: u32) -> u32 {
+pub fn get_local_storage_u32(
+    ls_name: &str,
+    default_value: u32,
+) -> u32 {
     let ls = web_sys::window().unwrap().local_storage().unwrap().unwrap();
 
     let mut return_value = default_value;
@@ -33,7 +36,10 @@ pub fn get_local_storage_u32(ls_name: &str, default_value: u32) -> u32 {
     return_value
 }
 
-pub fn get_local_storage_bool(ls_name: &str, default_value: bool) -> bool {
+pub fn get_local_storage_bool(
+    ls_name: &str,
+    default_value: bool,
+) -> bool {
     let ls = web_sys::window().unwrap().local_storage().unwrap().unwrap();
 
     let mut return_value = default_value;
@@ -66,7 +72,10 @@ pub fn get_local_storage_bool(ls_name: &str, default_value: bool) -> bool {
     return_value
 }
 
-pub fn get_local_storage_string(ls_name: &str, default_value: String) -> String {
+pub fn get_local_storage_string(
+    ls_name: &str,
+    default_value: String,
+) -> String {
     let ls = web_sys::window().unwrap().local_storage().unwrap().unwrap();
 
     let mut return_value = default_value.to_owned();
@@ -94,12 +103,18 @@ pub fn get_local_storage_string(ls_name: &str, default_value: String) -> String 
     return_value
 }
 
-pub fn set_local_storage_string(ls_name: &str, ls_value: String) {
+pub fn set_local_storage_string(
+    ls_name: &str,
+    ls_value: String,
+) {
     let ls = web_sys::window().unwrap().local_storage().unwrap().unwrap();
     _ = ls.set_item(ls_name, &ls_value);
 }
 
-pub fn set_local_storage_bool(ls_name: &str, ls_value: bool) {
+pub fn set_local_storage_bool(
+    ls_name: &str,
+    ls_value: bool,
+) {
     let ls = web_sys::window().unwrap().local_storage().unwrap().unwrap();
     if ls_value {
         _ = ls.set_item(ls_name, "1");
@@ -108,7 +123,10 @@ pub fn set_local_storage_bool(ls_name: &str, ls_value: bool) {
     }
 }
 
-pub fn set_local_storage_u32(ls_name: &str, ls_value: u32) {
+pub fn set_local_storage_u32(
+    ls_name: &str,
+    ls_value: u32,
+) {
     let ls = web_sys::window().unwrap().local_storage().unwrap().unwrap();
     _ = ls.set_item(ls_name, &ls_value.to_string());
 }

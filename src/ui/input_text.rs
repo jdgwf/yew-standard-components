@@ -58,21 +58,31 @@ impl Component for InputText {
         InputText {}
     }
 
-    fn update(&mut self, ctx: &Context<Self>, msg: InputTextMessage) -> bool {
+    fn update(
+        &mut self,
+        ctx: &Context<Self>,
+        msg: InputTextMessage,
+    ) -> bool {
         match msg {
             InputTextMessage::OnChange(new_value) => {
-
                 ctx.props().onchange.emit(new_value);
                 false
             }
         }
     }
 
-    fn changed(&mut self, _ctx: &Context<Self>, _old_props: &Self::Properties) -> bool {
+    fn changed(
+        &mut self,
+        _ctx: &Context<Self>,
+        _old_props: &Self::Properties,
+    ) -> bool {
         true
     }
 
-    fn view(&self, ctx: &Context<Self>) -> Html {
+    fn view(
+        &self,
+        ctx: &Context<Self>,
+    ) -> Html {
         let onchange = ctx.link().callback(|event: InputEvent| {
             let input: HtmlInputElement = event.target_unchecked_into();
             InputTextMessage::OnChange(input.value())

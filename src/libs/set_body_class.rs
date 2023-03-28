@@ -1,6 +1,9 @@
 use web_sys;
 
-pub fn set_body_class(new_value: String, server_side_renderer: bool) {
+pub fn set_body_class(
+    new_value: String,
+    server_side_renderer: bool,
+) {
     if server_side_renderer {
         return;
     }

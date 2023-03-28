@@ -65,32 +65,40 @@ impl Component for InputNumber {
         InputNumber {}
     }
 
-    fn update(&mut self, ctx: &Context<Self>, msg: InputNumberMessage) -> bool {
+    fn update(
+        &mut self,
+        ctx: &Context<Self>,
+        msg: InputNumberMessage,
+    ) -> bool {
         match msg {
             InputNumberMessage::OnChange(new_value) => {
-
                 let nv_res = new_value.parse::<f32>();
                 match nv_res {
-                    Ok( nv ) => {
+                    Ok(nv) => {
                         ctx.props().onchange.emit(nv);
                     }
-                    Err (err ) => {
-                        error!( format!("Cannot format f32! '{}' - {}", new_value, err) );
+                    Err(err) => {
+                        error!(format!("Cannot format f32! '{}' - {}", new_value, err));
                     }
                 }
 
                 false
             }
-
         }
     }
 
-    fn changed(&mut self, _ctx: &Context<Self>, _old_props: &Self::Properties) -> bool {
+    fn changed(
+        &mut self,
+        _ctx: &Context<Self>,
+        _old_props: &Self::Properties,
+    ) -> bool {
         true
     }
 
-    fn view(&self, ctx: &Context<Self>) -> Html {
-
+    fn view(
+        &self,
+        ctx: &Context<Self>,
+    ) -> Html {
         let mut description = html!(<></>);
         if ctx.props().description.to_owned() != "" {
             description = html!(
@@ -105,18 +113,16 @@ impl Component for InputNumber {
         let mut drop_down_version = false;
 
         match &ctx.props().step {
-            Some( step ) => {
+            Some(step) => {
                 if step == "1" {
-                    val = ( ctx.props().value.round() as i32 ).to_string();
+                    val = (ctx.props().value.round() as i32).to_string();
 
                     if ctx.props().min != None && ctx.props().max != None {
                         drop_down_version = true;
                     }
                 }
-
             }
-            None => {
-            }
+            None => {}
         }
 
         if drop_down_version && !ctx.props().readonly {
@@ -126,14 +132,20 @@ impl Component for InputNumber {
                 let input: HtmlSelectElement = event.target_unchecked_into();
 
                 InputNumberMessage::OnChange(input.value())
-
             });
 
             let min_str = ctx.props().min.clone();
             let max_str = ctx.props().max.clone();
 
-            let min = min_str.unwrap_or("0".to_owned()).parse::<i32>().unwrap_or(0);
-            let max = max_str.unwrap_or("0".to_owned()).parse::<i32>().unwrap_or(0) + 1;
+            let min = min_str
+                .unwrap_or("0".to_owned())
+                .parse::<i32>()
+                .unwrap_or(0);
+            let max = max_str
+                .unwrap_or("0".to_owned())
+                .parse::<i32>()
+                .unwrap_or(0)
+                + 1;
             let num_val = val.parse::<i32>().unwrap_or(0);
             let mut label_class = ctx.props().label_class.to_owned();
 

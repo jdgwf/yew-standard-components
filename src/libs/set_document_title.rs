@@ -1,6 +1,10 @@
 use web_sys;
 
-pub fn set_document_title(site_title: String, new_value: String, server_side_renderer: bool) {
+pub fn set_document_title(
+    site_title: String,
+    new_value: String,
+    server_side_renderer: bool,
+) {
     if server_side_renderer {
         return;
     }

@@ -57,7 +57,11 @@ impl Component for InputCheckbox {
         InputCheckbox
     }
 
-    fn update(&mut self, ctx: &Context<Self>, msg: InputCheckboxMessage) -> bool {
+    fn update(
+        &mut self,
+        ctx: &Context<Self>,
+        msg: InputCheckboxMessage,
+    ) -> bool {
         match msg {
             InputCheckboxMessage::OnChange(new_value) => {
                 ctx.props().onchange.emit(new_value);
@@ -66,7 +70,10 @@ impl Component for InputCheckbox {
         }
     }
 
-    fn view(&self, ctx: &Context<Self>) -> Html {
+    fn view(
+        &self,
+        ctx: &Context<Self>,
+    ) -> Html {
         let onchange = ctx.link().callback(|event: Event| {
             let input: HtmlInputElement = event.target_unchecked_into();
             InputCheckboxMessage::OnChange(input.checked())
