@@ -1,7 +1,3 @@
-// use gloo_console::log;
-// use block_rule;
-// use core_rule;
-// use inline_rule;
 // use markdown_it;
 
 // This one is not as good as markdown_it,
@@ -21,15 +17,7 @@ pub fn MarkdownView(props: &Props) -> Html {
     let markdown_text = props.markdown.to_owned() + &"\n";
 
     // let md = &mut markdown_it::MarkdownIt::new();
-
-    // add commonmark syntax, you almost always want to do that
     // markdown_it::plugins::cmark::add(md);
-
-    // add custom three rules described above
-    // inline_rule::add(md);
-    // block_rule::add(md);
-    // core_rule::add(md);
-
     // let inner_html = md.parse(&markdown_text).render();
 
     // Reverted back to markdown_to_html for now
